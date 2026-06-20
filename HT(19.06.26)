@@ -1,0 +1,25 @@
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk import pos_tag, FreqDist
+
+text = "Jan has skills in Python, Machine Learning and Data Analysis."
+
+tokens = word_tokenize(text)
+print("Tokens:", tokens)
+
+words = [w.lower() for w in tokens if w.isalpha() and w.lower() not in stopwords.words('english')]
+print("After Stopwords:", words)
+
+ps = PorterStemmer()
+print("Stemming:", [ps.stem(w) for w in words])
+
+lm = WordNetLemmatizer()
+print("Lemmatization:", [lm.lemmatize(w) for w in words])
+
+print("POS Tags:", pos_tag(words))
+
+fd = FreqDist(words)
+print("Frequency:")
+for w, c in fd.items():
+    print(w, ":", c)
