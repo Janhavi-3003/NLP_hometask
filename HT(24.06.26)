@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Ticket Booking</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(145, 88, 98);
+        }
+
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: pink;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Movie Ticket Booking</h2>
+
+        <input type="text" id="name" placeholder="Enter your name"><br>
+
+        <input type="number" id="phone" placeholder="Enter your phone number"><br>
+
+        <input type="email" id="email" placeholder="Enter your email"><br>
+
+        <input type="number" id="total" placeholder="Enter no. of tickets"><br>
+
+        <button id="bookBtn">Book Ticket</button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+    const button = document.getElementById("bookBtn");
+
+    button.addEventListener("click", function() {
+
+        let name = document.getElementById("name").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let tickets = document.getElementById("total").value.trim();
+        let message = document.getElementById("message");
+
+        let namePattern = /^[A-Za-z\s]+$/;
+        let phonePattern = /^\d{10}$/;
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (name === "") {
+            alert("Please enter your name.");
+            message.textContent = "Booking Failed!";
+        }
+        else if (!namePattern.test(name)) {
+            alert("Name should contain only letters.");
+            message.textContent = "Invalid Name!";
+        }
+        else if (!phonePattern.test(phone)) {
+            alert("Phone number must contain exactly 10 digits.");
+            message.textContent = "Invalid Phone Number!";
+        }
+        else if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            message.textContent = "Invalid Email!";
+        }
+        else if (tickets === "" || tickets <= 0) {
+            alert("Please enter a valid number of tickets.");
+            message.textContent = "Invalid Ticket Count!";
+        }
+        else {
+            alert("Ticket Booked Successfully!");
+            message.textContent =
+                "Ticket booked for " + name +
+                " (" + tickets + " ticket(s))";
+        }
+    });
+    </script>
+
+</body>
+</html>
